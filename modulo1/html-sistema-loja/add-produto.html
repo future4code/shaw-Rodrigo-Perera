@@ -4,41 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <title>Adicionar Produto</title>
 </head>
 <body>
     <div>
-        <p>Mercado do Rodrigo</p>
+        <header class="cabecalho">
+            <a class="margem-dos-links" href="index.html">Página Inicial</a>
+            <a class="margem-dos-links" href="ctrl-estoque.html">Controle de Estoque</a>
+            <a class="margem-dos-links" href="add-produto.html">Adicionar Produto</a>
+            <a class="margem-dos-links" href="funcionarios.html">Funcionários</a>
+        </header>
     </div>
-    
+
     <div>
-        <a href="index.html">Página Inicial</a>
-        <a href="ctrl-estoque.html">Controle de Estoque</a>
-        <a href="add-produto.html">Adicionar Produto</a>
-        <a href="funcionarios.html">Funcionários</a>
+        <p class="texto-principal">Mercado do Rodrigo</p>
     </div>
 
     
     <h2>Adicionar Produto</h2>
     <form action="ctrl-estoque.html">
-        <div>
+        <div class="margens-para-adicionar">
             <label for="link-foto">Link para foto: </label>
             <input type="url" id="link-foto" name="link-foto">
         </div>
         
-        <div>
+        <div class="margens-para-adicionar">
             <label for="descricao">Descrição do produto: </label>
             <!-- Adicione o id apropriado para o input abaixo -->
             <input type="text" id="descricao-produto" name="descrição">
         </div>
         
-        <div>
+        <div class="margens-para-adicionar">
             <label for="preco">Preço (em R$): </label>
             <!-- Adicione o id apropriado e o type para receber números abaixo -->
             <input type="text" id="preco-do-produto" name="preço">
         </div>
         
-        <div>
+        <div class="margens-para-adicionar">
             <!-- Preencha as propriedades necessárias para os elementos abaixo -->
             <label for="quantidade">Quantidade disponível: </label>
             <input type="text" id="quantidade-disponivel" name="quantidade">
@@ -46,10 +49,19 @@
 
         <div class="form-add">
             <!-- Adicione ao type do botão abaixo o valor para que ele submeta o formulário -->
-            <button type="submit">Adicionar</button>
+            <button class="botao" type="submit">Adicionar</button>
         </div>
 
     </form>
+
+    <div>
+        <footer class="rodape">
+            <span>Siga-nos nas redes sociais!</span>
+            <img id="icone-facebook"  src="https://static.vecteezy.com/ti/vetor-gratis/t2/2445918-social-media-facebook-logo-icon-gr%C3%A1tis-vetor.jpg"/>
+            <img id="icone-instagram"  src="https://image.flaticon.com/icons/png/512/25/25425.png"/>
+            <img id="icone-twitter"  src="https://iconsplace.com/wp-content/uploads/_icons/ffffff/256/png/twitter-icon-18-256.png" />
+        </footer>
+    </div>
 
 </body>
 </html>
