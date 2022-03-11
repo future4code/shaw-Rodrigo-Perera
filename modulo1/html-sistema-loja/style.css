@@ -1,0 +1,91 @@
+.cabecalho{
+    display: block;
+    background-color: lightseagreen;
+    padding: 35px 10px;
+    text-align: center;
+    }
+
+.margem-dos-links{
+    margin: 20px 40px 20px 40px;
+}
+
+#icone-instagram{
+    width: 30px;
+    height: 30px;
+    margin: 0px 20px 0px 20px;
+}
+
+#icone-facebook{
+    width: 40px;
+    height: 40px;
+    margin: 0px 20px 0px 20px;
+    
+}
+
+#icone-twitter{
+    width: 40px;
+    height: 40px;
+    margin: 0px 20px 0px 20px;
+}
+
+.rodape{
+    position: absolute;
+    bottom: 0;
+    background-color: lightsalmon;
+    color: black;
+    width: 100%;
+    height: 70px;    
+    text-align: center;
+    line-height: 100px;
+}
+
+.definindo-margens{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-top: auto;
+    width: 100%;
+    text-align: center;
+}
+
+#img-banana{
+    width: 80px;
+}
+
+#img-maca{
+    width: 80px;
+}
+
+#img-manga{
+    width: 80px;
+}
+
+#img-uva{
+    width: 80px;
+}
+
+#img-pera{
+    width: 80px;
+}
+
+.texto-principal{
+    text-decoration:overlined;
+    font-style: italic;
+    font-size: 50px;
+    color: rgb(126, 53, 126);
+    background-color: lightslategray;
+    border-radius: 20px;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.margens-para-adicionar{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+}
+
+.botao{
+    size: 70px;
+    border-radius: 25px
+}
