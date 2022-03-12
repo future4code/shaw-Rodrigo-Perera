@@ -85,3 +85,24 @@ a {
     color: blueviolet;
     font-weight: bold;
 }
+
+.projetos {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color:rgb(156, 2, 48)
+}
+
+.imagem-pagina-de-projeto {
+    text-align: center;
+}
+
+.imagem-pagina-de-projeto h1 {
+    text-decoration: overline;
+    color:rgb(156, 2, 48)
+}
+
+#contato input {
+    width: 600px;
+    height: 300px;
+}
