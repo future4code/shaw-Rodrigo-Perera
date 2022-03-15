@@ -1,0 +1,108 @@
+body {
+    background-image: url("imagens/background-abstrato.jpg");
+    background-size: 100%;
+    display: block;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.cabecalho{
+    display: block;
+    background-color: lightsalmon;
+    padding: 20px 10px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#margem-projeto{
+    margin-right: 25vw;
+    margin-left: 25vw;
+}
+
+.full-body {
+    border-style:dotted;
+    color: grey;
+    background-color: lightpink;
+    padding: 5%;
+    border-radius: 15px;
+    margin-top: 6%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 40%;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;;
+
+}
+
+#foto-perfil {
+    border-radius: 50%;
+    border-width: 3px;
+    border-style: dotted;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -25%;
+}
+
+.rodape{
+    position: sticky;
+    bottom: 6;
+    background-color: lightsalmon;
+    color: black;
+    width: 100%;
+    height: 70px;    
+    text-align: center;
+    line-height: 100px;
+    margin-top: 50px;
+}
+
+.imagens-projeto{
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.imagens-projeto img:hover{
+    transform: scale(1.08);
+    border-radius: 0;
+}
+
+.imagens-projeto img{
+    transition: all linear 300ms;
+    border-radius: 30%;
+}
+
+a {
+    text-decoration: none;
+}
+
+.imagens-projeto a{
+    color:black;
+}
+
+.cabecalho a{
+    color: blueviolet;
+    font-weight: bold;
+}
+
+.projetos {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color:rgb(156, 2, 48)
+}
+
+.imagem-pagina-de-projeto {
+    text-align: center;
+}
+
+.imagem-pagina-de-projeto h1 {
+    text-decoration: overline;
+    color:rgb(156, 2, 48)
+}
+
+#contato input {
+    width: 600px;
+    height: 300px;
+}
