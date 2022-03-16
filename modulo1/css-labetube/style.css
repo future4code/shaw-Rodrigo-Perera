@@ -77,3 +77,27 @@ footer {
     align-items: center;
     text-align: center;
 }
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    header {
+        padding: 0;
+        width: 100vw;
+    }
+
+    .logo {
+        font-size: 10px;
+        background-color: red;
+        padding: 1vw 15vw;
+        border-radius: 30%;
+        margin: 4vw;
+    }
+
+    input {
+        width: 30vw;
+    }
+
+    button {
+        margin: 2vw;
+    }
+
+}
