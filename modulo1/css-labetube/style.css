@@ -1,0 +1,103 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-color: darkgrey;
+    padding: 10px 500px 10px 20px;    
+}
+
+.logo {
+    display: flex;
+    background-color: red;
+    color: white;
+    border-radius: 30%;
+    height: 4vh;
+    width: 6vw;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+main {
+    display: flex;
+    text-align: center;
+    flex-wrap: wrap;
+    gap: 150px;
+    justify-content: center;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.video-front{
+    border: 1px solid black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 10px;
+    box-shadow: 5px 5px 12px #00000082
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    background-color: darkgray;
+    padding: 15px 0px 15px 0px;
+}
+
+.video-pagina {
+    display: block;
+}
+
+
+
+.video-pagina video {
+    display: flex;
+    width: 50%;
+    justify-self: center;
+}
+
+.titulo-video {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-grow: 0;
+    margin: 0 0 20px 0;
+}
+
+.video-centralizado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    header {
+        padding: 0;
+        width: 100vw;
+    }
+
+    .logo {
+        font-size: 10px;
+        background-color: red;
+        padding: 1vw 15vw;
+        border-radius: 30%;
+        margin: 4vw;
+    }
+
+    input {
+        width: 30vw;
+    }
+
+    button {
+        margin: 2vw;
+    }
+
+}
