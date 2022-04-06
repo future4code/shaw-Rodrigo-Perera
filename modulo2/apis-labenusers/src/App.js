@@ -17,12 +17,15 @@ const deleteUrl =
 const getAllUsersUrl =
   "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users";
 
+  const userUrl =
+  "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/";
+
 export default class App extends React.Component {
   state = {
     listaDeUsuarios: [],
     inputNome: "",
     inputEmail: "",
-    telaAtual: true,
+    telaAtual: "criarUsuario",
   };
 
   onChangeNome = (event) => {
@@ -51,12 +54,12 @@ export default class App extends React.Component {
   };
 
   onClickTrocarDeTela = () => {
-    if (this.state.telaAtual === false) {
-      this.setState({ telaAtual: true });
+    if (this.state.telaAtual === "criarUsuario") {
+      this.setState({ telaAtual: "listaDeUsuario" });
+      this.getAllUser();
     }
-    if (this.state.telaAtual === true) {
-      this.setState({ telaAtual: false });
-      this.getAllUser()
+    if (this.state.telaAtual === "listaDeUsuario") {
+      this.setState({ telaAtual: "criarUsuario" });
     }
   };
 
@@ -72,53 +75,92 @@ export default class App extends React.Component {
   }
 
   deleteUser(id) {
+    if (window.confirm("Tem certeza de que deseja deletar?")) {
+      axios
+        .delete(`${deleteUrl}${id}`, headers)
+        .then(() => {
+          alert("Usuario Foi Deletado");
+          this.getAllUser();
+        })
+        .catch((error) => {
+          alert(error.response.data.message);
+        });
+    }
+  }
+
+  getUserById(id) {
+    console.log(id)
     axios
-    .delete(`${deleteUrl}${id}`, headers)
-    .then(() => {
-      alert("Usuario Foi Deletado")
-      this.getAllUser()
-    })
-    .catch((error) => {
-      alert(error.response.data.message);
-    })
+      .get(`${userUrl}${id}`, headers)
+      .then((response) => {
+        this.setState({
+          telaAtual: "usuarioDetalhado",
+          name: response.data.name,
+          email: response.data.email
+        })
+      })
+      .catch((error) => {
+        alert(error.response.data.message)
+      });
+  }
+
+  onClickBotaoVoltar = () => {
+    this.setState({ telaAtual: "listaDeUsuario"})
   }
 
   render() {
     const listaDeNomes = this.state.listaDeUsuarios.map((usuario) => {
-      return <p key={usuario.id}>{usuario.name}<button onClick={ ()=> this.deleteUser(usuario.id)}>X</button></p>
-    })
-    if (this.state.telaAtual === false) {
+      return (
+        <p onClick={() => this.getUserById(usuario.id)} key={usuario.id}>
+          {usuario.name}
+          <button onClick={() => this.deleteUser(usuario.id)}>X</button>
+        </p>
+      );
+    });
+    if (this.state.telaAtual === "listaDeUsuario") {
       return (
         <div>
           <button onClick={this.onClickTrocarDeTela}>
-            {this.state.telaAtual}Trocar De Tela
+            Trocar De Tela
           </button>
           {listaDeNomes}
         </div>
       );
     }
-    return (
-      <div>
-        <button onClick={this.onClickTrocarDeTela}>
-          {this.state.telaAtual}Trocar De Tela
-        </button>
+    if (this.state.telaAtual === "criarUsuario"){
+      return (
         <div>
-          <label>
-            Novo Usuário:
-            <input
-              value={this.state.inputNome}
-              onChange={this.onChangeNome}
-              placeholder="Digite Seu Nome"
-            />
-            <input
-              value={this.state.inputEmail}
-              onChange={this.onChangeEmail}
-              placeholder="Digite Seu Email"
-            />
-            <button onClick={this.createUser}>Criar Novo Usuário</button>
-          </label>
+          <button onClick={this.onClickTrocarDeTela}>
+            Trocar De Tela
+          </button>
+          <div>
+            <label>
+              Novo Usuário:
+              <input
+                value={this.state.inputNome}
+                onChange={this.onChangeNome}
+                placeholder="Digite Seu Nome"
+              />
+              <input
+                value={this.state.inputEmail}
+                onChange={this.onChangeEmail}
+                placeholder="Digite Seu Email"
+              />
+              <button onClick={this.createUser}>Criar Novo Usuário</button>
+            </label>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+    if (this.state.telaAtual === "usuarioDetalhado"){
+      return (
+        <div>
+          <button onClick={this.onClickBotaoVoltar}>Back</button>
+          <p>Nome: {this.state.name}</p>
+          <p>E-mail: {this.state.email}</p>
+          <button>Editar Perfil</button>
+        </div>
+      )
+    }
   }
 }
