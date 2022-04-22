@@ -32,7 +32,7 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   padding: 13px;
-`
+`;
 
 const BotaoLike = styled.button`
   padding: 20px;
@@ -40,10 +40,10 @@ const BotaoLike = styled.button`
   border: 1px solid green;
   transition: 0.2s linear;
   cursor: pointer;
-  &:hover{
+  &:hover {
     background-color: rgba(0, 255, 0, 0.5);
   }
-`
+`;
 
 const BotaoDislike = styled.button`
   padding: 20px;
@@ -51,10 +51,10 @@ const BotaoDislike = styled.button`
   border: 1px solid red;
   transition: 0.2s linear;
   cursor: pointer;
-  &:hover{
+  &:hover {
     background-color: rgba(255, 0, 0, 0.5);
   }
-`
+`;
 
 const BotaoMatch = styled.button`
   background-color: white;
@@ -63,32 +63,43 @@ const BotaoMatch = styled.button`
   transition: 0.2s linear;
   border-radius: 30%;
   cursor: pointer;
-  &:hover{
-    background-color: rgba(100, 100, 100, 0.5)
+  &:hover {
+    background-color: rgba(100, 100, 100, 0.5);
   }
-  
-`
+`;
 
 const urlPerson =
   "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/rodrigo-pernambuco-shaw/person";
 
-const urlClear = 'https://us-central1-missao-newton.cloudfunctions.net/astroMatch/rodrigo-pernambuco-shaw/clear'
+const urlClear =
+  "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/rodrigo-pernambuco-shaw/clear";
+
+const urlChoose =
+  "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/rodrigo-pernambuco-shaw/choose-person";
 
 const App = () => {
   const [perfil, setPerfil] = useState({});
-  const [tela, setTela] = useState(false)
+  const [tela, setTela] = useState(false);
 
   useEffect(() => {
     pegarPerfil();
   }, []);
 
+  const escolherPerfil = (id, boolean) => {
+    const body = { id: id, choice: boolean };
+    axios
+      .post(urlChoose, body)
+      .then(() => pegarPerfil())
+      .catch((error) => console.log(error.data.response));
+  };
+
   const irParaMatch = () => {
-    setTela(true)
-  }
+    setTela(true);
+  };
 
   const irParaHome = () => {
-    setTela(false)
-  }
+    setTela(false);
+  };
 
   const pegarPerfil = () => {
     axios
@@ -103,21 +114,22 @@ const App = () => {
 
   const limparInfo = () => {
     axios
-    .put(urlClear)
-    .then(() => {
-      alert('Limpou')
-    })
-    .catch((error) => {
-      console.log(error.response.data)
-    })
-  }
+      .put(urlClear)
+      .then(() => {
+        alert("Limpou");
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+  };
 
-  if(tela === false){
+  if (tela === false) {
     return (
       <MainCotainer>
         <Card>
           <Header>
-            astroMatch
+            <b>astroMatch</b>
+            <BotaoMatch onClick={limparInfo}>Limpar Matches</BotaoMatch>
             <BotaoMatch onClick={irParaMatch}>Match</BotaoMatch>
           </Header>
           <Perfil
@@ -126,19 +138,20 @@ const App = () => {
             bio={perfil.bio}
             foto={perfil.photo}
           />
-  
+
           <Button>
-            <BotaoDislike onClick={pegarPerfil}><b>❌</b></BotaoDislike>
-            <BotaoLike onClick={pegarPerfil}><b>✔️</b></BotaoLike>
+            <BotaoDislike onClick={() => escolherPerfil(perfil.id, false)}>
+              ❌
+            </BotaoDislike>
+            <BotaoLike onClick={() => escolherPerfil(perfil.id, true)}>
+              ✔️
+            </BotaoLike>
           </Button>
         </Card>
-        <button onClick={limparInfo}>Limpar Swipes e Matches</button>
       </MainCotainer>
     );
   }
-  return (
-    <MatchScreen irParaHome={irParaHome} />
-  )
+  return <MatchScreen irParaHome={irParaHome} limparInfo={limparInfo} />;
 };
 
 export default App;
