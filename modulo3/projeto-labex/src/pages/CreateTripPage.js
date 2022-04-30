@@ -1,16 +1,53 @@
 import React, { useState, useEffect } from "react";
-// import styled from "styled-components";
+import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { goBack, goToLogin } from "../routes/coordinator";
 import useForm from "../hooks/useForm";
 import axios from "axios";
 import useAuthorization from "../hooks/useAuthorization";
 
+const MainContainer = styled.div`
+  font-family: "Kanit", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+`;
+
+const Form = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Button = styled.button`
+  margin-right: 10px;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 25%;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  &:hover{
+    background-color: grey;
+    color: black;
+  }
+`
+
+const Input = styled.input`
+  width: 475px;
+  padding: 10px;
+`
+
+const Select = styled.select`
+  width: 500px;
+  padding: 10px;
+`
+
 const CreateTripPage = () => {
   const navigate = useNavigate();
 
-  const token = useAuthorization()
-
+  const token = useAuthorization();
 
   const { form, onChange, cleanFields } = useForm({
     name: "",
@@ -49,71 +86,83 @@ const CreateTripPage = () => {
   };
 
   return (
-    <div>
-      <p>Criar Viagem</p>
+    <MainContainer>
+      <h1><b>Criar Viagem</b></h1>
+      <Form>
       <form onSubmit={createTrip}>
-        <input
-          name={"name"}
-          value={form.name}
-          onChange={onChange}
-          placeholder={"Nome do Evento"}
-          required
-          pattern={"^.{3,}"}
-          title={"Mínimo de 3 caractéres"}
-        />
+        <p>
+          <Input
+            name={"name"}
+            value={form.name}
+            onChange={onChange}
+            placeholder={"Nome do Evento"}
+            required
+            pattern={"^.{3,}"}
+            title={"Mínimo de 3 caractéres"}
+          />
+        </p>
 
-        <select
-          onChange={onChange}
-          name={"planet"}
-          value={form.planet}
-          required
-        >
-          <option value="">Escolha um Planeta</option>
-          <option>Mercúrio</option>
-          <option>Vênus</option>
-          <option>Terra</option>
-          <option>Marte</option>
-          <option>Júpiter</option>
-          <option>Saturno</option>
-          <option>Urano</option>
-          <option>Netuno</option>
-        </select>
+        <p>
+          <Select
+            onChange={onChange}
+            name={"planet"}
+            value={form.planet}
+            required
+          >
+            <option value="">Escolha um Planeta</option>
+            <option>Mercúrio</option>
+            <option>Vênus</option>
+            <option>Terra</option>
+            <option>Marte</option>
+            <option>Júpiter</option>
+            <option>Saturno</option>
+            <option>Urano</option>
+            <option>Netuno</option>
+          </Select>
+        </p>
 
-        <input
-          name={"date"}
-          value={form.date}
-          onChange={onChange}
-          placeholder={"Data da Viagem"}
-          required
-          type={"date"}
-          min={today()}
-        />
+        <p>
+          <Input
+            name={"date"}
+            value={form.date}
+            onChange={onChange}
+            placeholder={"Data da Viagem"}
+            required
+            type={"date"}
+            min={today()}
+          />
+        </p>
 
-        <input
-          name={"description"}
-          value={form.description}
-          onChange={onChange}
-          placeholder={"Descrição da Viagem"}
-          required
-          // pattern={"^.{30,}"}
-          // title={'Mínimo de 30 caractéres'}
-        />
+        <p>
+          <Input
+            name={"description"}
+            value={form.description}
+            onChange={onChange}
+            placeholder={"Descrição da Viagem"}
+            required
+            pattern={"^.{30,}"}
+            title={"Mínimo de 30 caractéres"}
+          />
+        </p>
 
-        <input
-          name={"durationInDays"}
-          value={form.durationInDays}
-          onChange={onChange}
-          placeholder={"Duração em Dias"}
-          required
-          min={50}
-          type={"number"}
-          title={"Mínimo de 50 dias"}
-        />
+        <p>
+          <Input
+            name={"durationInDays"}
+            value={form.durationInDays}
+            onChange={onChange}
+            placeholder={"Duração em Dias"}
+            required
+            min={50}
+            type={"number"}
+            title={"Mínimo de 50 dias"}
+          />
+        </p>
 
-        <button>Criar</button>
+        <Button>Criar</Button>
+        <Button onClick={() => goBack(navigate)}>Voltar</Button>
       </form>
-      <button onClick={() => goBack(navigate)}>Voltar</button>
-    </div>
+      </Form>
+    </MainContainer>
   );
 };
 
