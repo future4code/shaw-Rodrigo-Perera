@@ -8,7 +8,7 @@ import { Input } from "../../components/Input";
 
 const LoginPage = () => {
 
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate()
 

@@ -9,7 +9,7 @@ import { Input } from "../../components/Input";
 
 const SignupPage = () => {
 
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate()
 
