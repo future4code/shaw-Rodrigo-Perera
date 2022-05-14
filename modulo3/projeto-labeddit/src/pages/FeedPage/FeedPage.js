@@ -5,12 +5,19 @@ import styled from "@emotion/styled";
 import Loading from "../../components/Loading";
 import { getAllPosts, decideVote, deleteVote, createPost } from "../../requests";
 import useForm from "../../hooks/useForm";
+import { goToPostPage, goToLoginPage } from "../../routes/coordinator";
+import { useLoading, usePost } from "../../hooks/useGlobalState";
+import Button from "../../components/Button";
 
-const Teste = styled.div`
-    color: white;
+const MainContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
 `
 
-const Button = styled.button`
+const VoteButton = styled.button`
     background-color: transparent;
     color: ${props => props.active ? props.activeColor : "white"};
     font-size: 24px;
@@ -19,10 +26,58 @@ const Button = styled.button`
     cursor: pointer;
 `
 
+const CommentButton = styled.button`
+    background-color: #341860;
+    color: white;
+    border: none;
+    cursor: pointer;
+`
+
+const Card = styled.div`
+    border: 1px solid black;
+    border-radius: 16px;
+    background-color: #341860;
+    color: black;
+    width: 80%;
+    margin: 5px 0;
+    padding: 12px;
+    overflow-wrap: break-word;
+`
+
+const VoteSection = styled.div`
+    display: flex;
+    margin: 8px;
+`
+
+const VoteContainer = styled.div`
+    border: 1px solid white;
+    border-radius: 8px;
+    padding: 4px;
+    margin: 8px;
+    color: white;
+`
+
+const CommentContainer = styled.div`
+    display: flex;
+    background-color: #341860;
+    border: 1px solid white;
+    border-radius: 8px;
+    padding: 4px;
+    margin: 8px;
+    place-items: center;
+`
+
+const InputContainer = styled.form`
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+`
+
 const FeedPage = () => {
 
     const [posts, setPosts] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useLoading()
+    const [post, setPost] = usePost()
 
     const {form, onChange, cleanFields} = useForm({
         title: "",
@@ -87,40 +142,60 @@ const FeedPage = () => {
             })
     }
 
+    const onClickCommentDetailPage = (post) => {
+        goToPostPage(navigate, post.id)
+        setPost(post)
+    }
+
+    const onClickLogout = () => {
+        localStorage.removeItem("token");
+        goToLoginPage(navigate);
+          
+    }
+
     const getPost = posts.map((post) => {
         return(
-            <Teste key={post.id}>
-                <p>Envidado por: {post.username}</p>
-                {post.body}
-                <p>coment: {post.commentCount}</p>
-                <p>voto: {post.voteSum}</p>
-                <Button activeColor={"green"} active={post.userVote === 1} onClick={() => post.userVote === 1 ? onClickNoVote(post.id) : onClickVote(post.id, 1)}>⬆</Button>
-                <Button activeColor={"red"} active={post.userVote === -1} onClick={() => post.userVote === -1 ? onClickNoVote(post.id) : onClickVote(post.id, -1) }>⬇</Button>
-            </Teste>
+            <Card key={post.id}>
+                <h6>Envidado por: {post.username}</h6>
+                <h4>{post.body}</h4>
+                <VoteSection>
+                    <VoteContainer>
+                        <VoteButton activeColor={"green"} active={post.userVote === 1} onClick={() => post.userVote === 1 ? onClickNoVote(post.id) : onClickVote(post.id, 1)}>⬆</VoteButton>
+                        {post.voteSum}
+                        <VoteButton activeColor={"red"} active={post.userVote === -1} onClick={() => post.userVote === -1 ? onClickNoVote(post.id) : onClickVote(post.id, -1) }>⬇</VoteButton>
+                    </VoteContainer>
+                    <CommentContainer>
+                        <CommentButton value={post.id} onClick={() => onClickCommentDetailPage(post)}>🗨 {post.commentCount}</CommentButton>
+                    </CommentContainer>
+                </VoteSection>
+            </Card>
         )
     })
 
     return (
-        <div>
+        <MainContainer>
             {loading && <Loading />}
-            <form onSubmit={onClickCreatePost}>
-            <input
-                name={"title"}
-                value={form.title}
-                onChange={onChange}
-                placeholder={"Título do seu post"}
-            />
-            <textarea
-                name={"body"}
-                value={form.body}
-                onChange={onChange}
-                placeholder={"Adicione um post"}
-            />
-            <button>Postar</button>
-            </form>
+            <Button onClick={() => onClickLogout()}>Logout</Button>
+            <h2>FeedPage</h2>
+            <div>
+                <InputContainer onSubmit={onClickCreatePost}>
+                <input
+                    name={"title"}
+                    value={form.title}
+                    onChange={onChange}
+                    placeholder={"Título do seu post"}
+                />
+                <textarea
+                    name={"body"}
+                    value={form.body}
+                    onChange={onChange}
+                    placeholder={"Adicione um post"}
+                />
+                <Button>Postar</Button>
+                </InputContainer>
+            </div>
             {getPost}
-            Feed Page
-        </div>
+        </MainContainer>
     )
 }
 

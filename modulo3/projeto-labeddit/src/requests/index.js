@@ -62,3 +62,53 @@ export const createPost = (form) => {
     })
     return promise
 }
+
+export const commentDetail = (id) => {
+    const {token} = localStorage
+    const url = `${baseUrl}/posts/${id}/comments`
+
+    const promise = axios.get(url, {
+        headers: {
+            Authorization: token
+        }
+    })
+    return promise
+}
+
+export const comment = (id, form) => {
+    const {token} = localStorage
+    const url = `${baseUrl}/posts/${id}/comments`
+
+    const promise= axios.post(url, form, {
+        headers: {
+            Authorization: token
+        }
+    })
+    return promise
+}
+
+export const deleteCommentVote = (id) => {
+    const {token} = localStorage
+    const url = `${baseUrl}/comments/${id}/votes`
+
+    const promise = axios.delete(url, {
+        headers: {
+            Authorization: token
+        }
+    })
+    return promise
+}
+
+export const decideCommentVote = (id, direction) => {
+    const {token} = localStorage
+    const url = `${baseUrl}/comments/${id}/votes`
+    const body = {
+        direction: direction
+      }
+    const promise = axios.post(url, body, {
+        headers: {
+            Authorization: token
+        }
+    })
+    return promise
+}
