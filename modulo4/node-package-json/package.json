@@ -1,0 +1,16 @@
+{
+  "name": "package-json",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./index.js",
+    "ex1": "node ./Exercicio1/index.js",
+    "ex2": "node ./Exercicio2/index.js",
+    "ex3": "node ./Exercicio3/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
