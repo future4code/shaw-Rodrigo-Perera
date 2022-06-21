@@ -1,0 +1,2 @@
+// a) A grande diferença é que ao invés de alterar as funcionalidades que queremos no package.json, do jeito que foi feito em aula nós colocariamos as funcionalidades
+// que queriamos "na mão". Concluindo que o tsc --init temos uma gama maior de funcuinalidades sem que precise buscar ou pesquisar por faltas no seu projeto.
