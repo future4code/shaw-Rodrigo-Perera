@@ -1,5 +1,6 @@
 import React from "react";
 import RouterComp from "./routes/RouterComp";
+import './App.css'
 
 function App() {
   return (
